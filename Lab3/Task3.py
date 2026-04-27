@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.io import wavfile
-from scipy.fft import dct, idct  # Импортируем ДКП и ОДКП
+from scipy.fft import dct, idct  
 from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm

@@ -14,7 +14,7 @@ amp = 6000
 f_size = 1024
 h_size = 256
 
-print("Randomised frequency: ", f)
+print("Frequency: ", f)
 
 t = np.arange(0, T, 1/sr)
 
