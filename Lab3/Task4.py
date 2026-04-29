@@ -28,14 +28,6 @@ for font_file in fm.findSystemFonts(fontpaths=font_dir):
 font_label = {'fontname': 'Times New Roman', 'size': 12}
 font_title = {'fontname': 'Times New Roman', 'size': 14, 'weight': 'bold'}
 
-def load_and_pad(path):
-    y, sr = librosa.load(path, sr=SR, mono=True)
-    if len(y) > TARGET_LEN:
-        y = y[:TARGET_LEN]
-    else:
-        y = np.pad(y, (0, TARGET_LEN - len(y)))
-    return y
-
 def custom_mfcc(y, sr=SR, n_fft=N_FFT, hop_length=HOP_LENGTH, n_mfcc=N_MFCC):
     D = np.abs(librosa.stft(y, n_fft=n_fft, hop_length=hop_length))**2
     S = librosa.feature.melspectrogram(S=D, sr=sr, n_fft=n_fft, hop_length=hop_length)
@@ -60,7 +52,7 @@ def load_dataset(use_custom=False, add_std=False):
     for class_idx, class_dir in enumerate([a_dir, b_dir]):
         class_files = [f for f in class_dir.glob('*.wav')][:10]
         for path in class_files:
-            audio = load_and_pad(path)
+            audio, _ = librosa.load(path, sr=SR, mono=True)
             features = extract_features(audio, use_custom=use_custom, add_std=add_std)
             X.append(features)
             y.append(class_idx)
