@@ -3,8 +3,6 @@ import scipy.io.wavfile as wav
 from scipy.signal import spectrogram
 import matplotlib.pyplot as plt
 
-#vibecoded
-
 def nextpow2(x):
     return int(np.ceil(np.log2(max(x, 1))))
 
